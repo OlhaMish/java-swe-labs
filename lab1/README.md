@@ -7,8 +7,12 @@ C7: Variant: 6: Float
 C11: Variant: 7: Calculate the sum of the largest elements in the columns of the 
 matrix with odd numbers and the smallest elements in the columns of the matrix with even numbers
 
+Clone repository:
+```bash
+git clone https://github.com/OlhaMish/java-swe-labs.git
+```
 
-To run you need JDK 
+To run you need JDK! 
 ```bash
 cd path/to/java-swe-labs/lab1
 ```
