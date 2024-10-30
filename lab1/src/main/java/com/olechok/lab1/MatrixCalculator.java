@@ -54,7 +54,7 @@ public class MatrixCalculator {
                     }
                 }
             }
-            System.out.println("extremeValue: " + extremeValue);
+            // System.out.println("extremeValue: " + extremeValue);
             sum += extremeValue;
         }
         return sum;
