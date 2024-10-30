@@ -1,4 +1,4 @@
-package com.olechok;
+package com.olechok.lab1;
 
 
 public class MatrixCalculator {
