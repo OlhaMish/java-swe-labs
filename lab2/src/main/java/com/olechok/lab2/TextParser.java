@@ -27,9 +27,10 @@ public class TextParser {
         while (matcher.find()) {
             String token = matcher.group();
             if (token.matches("\\p{L}+|\\p{N}+") && token.length() == sizeOfWord) {
-                result += replacement;
+                result = result.concat(replacement);
             } else {
-                result += token;
+                result = result.concat(token);
+
             }
         }
         return result;
