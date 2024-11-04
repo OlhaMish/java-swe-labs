@@ -6,9 +6,8 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        try {
+        try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Enter text: ");
             String text = scanner.nextLine();
 
@@ -34,8 +33,6 @@ public class Main {
             System.out.println("Error: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Unknown error: " + e.getMessage());
-        } finally {
-            scanner.close();
         }
     }
 
