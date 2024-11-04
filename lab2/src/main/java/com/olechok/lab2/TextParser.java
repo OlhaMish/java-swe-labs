@@ -7,24 +7,31 @@ package com.olechok.lab2;
 //програмного коду. Всі змінні повинні бути описані та значення їх задані у виконавчому методі.
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class TextParser {
 
-    public static String replaceWordsBySizeToRow(String text, int SizeOfWord, String replacement) {
+    public static String replaceWordsBySizeToRow(String text, int sizeOfWord, String replacement) {
         if (text == null || replacement == null) {
             throw new IllegalArgumentException("The replacement text or string cannot be null\n");
         }
-        if (SizeOfWord <= 0) {
+        if (sizeOfWord <= 0) {
             throw new IllegalArgumentException("The word length must be greater than zero\n");
         }
-        String[] arrayOfWords = text.split("[^\\p{L}\\p{N}]+");
-        String processedArrayOfWords = "";
 
-        for (String word : arrayOfWords){
-            if (word.length() == SizeOfWord){
-                word = replacement;
+        String result = "";
+        Pattern pattern = Pattern.compile("\\p{L}+|\\p{N}+|[^\\p{L}\\p{N}]+");
+        Matcher matcher = pattern.matcher(text);
+
+        while (matcher.find()) {
+            String token = matcher.group();
+            if (token.matches("\\p{L}+|\\p{N}+") && token.length() == sizeOfWord) {
+                result += replacement;
+            } else {
+                result += token;
             }
-            processedArrayOfWords += " " + word;
         }
-        return processedArrayOfWords;
+        return result;
     }
 }
