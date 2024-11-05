@@ -1,10 +1,19 @@
 package com.olechok.lab4.components;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a text composed of multiple sentences.
+ */
 public class Text {
     private final List<Sentence> sentences;
 
+    /**
+     * Constructs a Text object from a string, parsing it into sentences.
+     *
+     * @param text The text as a string.
+     */
     public Text(String text) {
         sentences = new ArrayList<>();
         String[] sentencesArray = text.split("(?<=[.!?])\\s+");
@@ -13,6 +22,11 @@ public class Text {
         }
     }
 
+    /**
+     * Converts the text to a string representation.
+     *
+     * @return The string representation of the text.
+     */
     @Override
     public String toString() {
         List<String> parts = new ArrayList<>();
@@ -24,6 +38,12 @@ public class Text {
         return String.join(" ", parts).trim();
     }
 
+    /**
+     * Replaces words of the specified length in all sentences with a replacement string.
+     *
+     * @param length      The length of the words to replace.
+     * @param replacement The replacement string.
+     */
     public void replaceWordsOfLength(int length, String replacement) {
         for (Sentence sentence : sentences) {
             sentence.replaceWordsOfLengthInSentence(length, replacement);
