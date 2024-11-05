@@ -73,5 +73,4 @@ public class Main {
         System.out.println("\nIs target furniture found? " + found);
 
     }
-
 }

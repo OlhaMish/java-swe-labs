@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-
 public class Main {
     private float[][] firstMatrix;
     private float[][] secondMatrix;
