@@ -1,5 +1,5 @@
 package com.olechok.lab5;
-import com.olechok.lab5.vegetable.Vegetable;
+import com.olechok.lab5.vegetables.Vegetable;
 
 import java.util.ArrayList;
 import java.util.Comparator;

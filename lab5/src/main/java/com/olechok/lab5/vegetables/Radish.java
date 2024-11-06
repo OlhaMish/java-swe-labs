@@ -1,4 +1,4 @@
-package com.olechok.lab5.vegetable;
+package com.olechok.lab5.vegetables;
 
 /**
  * Represents a specific type of vegetable: Radish.

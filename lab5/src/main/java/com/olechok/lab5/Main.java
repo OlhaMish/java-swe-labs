@@ -1,6 +1,6 @@
 package com.olechok.lab5;
 
-import com.olechok.lab5.vegetable.*;
+import com.olechok.lab5.vegetables.*;
 
 import java.util.Comparator;
 import java.util.InputMismatchException;

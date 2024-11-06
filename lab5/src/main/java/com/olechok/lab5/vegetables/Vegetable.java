@@ -1,4 +1,4 @@
-package com.olechok.lab5.vegetable;
+package com.olechok.lab5.vegetables;
 
 import java.util.Objects;
 
