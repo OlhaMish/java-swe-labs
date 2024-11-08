@@ -20,6 +20,11 @@ public class SaladMaker {
         ingredients = new ArrayList<>();
     }
 
+    public SaladMaker(List<Vegetable> ingredients) {
+        this.ingredients = new ArrayList<>(ingredients);
+//        this.ingredients = ingredients;
+    }
+
     /**
      * Gets the list of salad ingredients.
      *
