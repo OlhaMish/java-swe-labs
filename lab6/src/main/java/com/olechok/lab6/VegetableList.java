@@ -284,6 +284,22 @@ public class VegetableList implements List<Vegetable> {
     }
 
     @Override
+    public List<Vegetable> subList(int fromIndex, int toIndex) {
+        if (fromIndex < 0 || toIndex > size || fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("fromIndex: " + fromIndex + ", toIndex: " + toIndex + ", Size: " + size);
+        }
+
+        VegetableList sublist = new VegetableList();
+        Node current = getNode(fromIndex);
+
+        for (int i = fromIndex; i < toIndex; i++) {
+            sublist.add(current.vegetable);
+            current = current.next;
+        }
+        return sublist;
+    }
+
+    @Override
     public ListIterator<Vegetable> listIterator() {
         return new VegetableListIterator(0);
     }
