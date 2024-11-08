@@ -1,39 +1,61 @@
 package com.olechok.lab6;
+
 import com.olechok.lab6.vegetables.Vegetable;
 import java.util.*;
 
+/**
+ * A custom implementation of the List interface for managing a collection of Vegetable objects.
+ * Uses a singly linked list structure with a nested Node class to represent each element.
+ */
 public class VegetableList implements List<Vegetable> {
     private Node head;
     private int size;
 
+    /**
+     * Represents a node in the linked list containing a Vegetable and a reference to the next node.
+     */
     private static class Node {
         Vegetable vegetable;
         Node next;
 
+        /**
+         * Constructs a Node containing the specified vegetable.
+         *
+         * @param vegetable the vegetable to store in the node
+         */
         Node(Vegetable vegetable) {
             this.vegetable = vegetable;
         }
     }
 
-    // 1. Порожній конструктор
+    /**
+     * Default constructor initializing an empty VegetableList.
+     */
     public VegetableList() {
         head = null;
         size = 0;
     }
 
-    // 2. Конструктор з одним об’єктом
+    /**
+     * Constructs a VegetableList with a single Vegetable.
+     *
+     * @param vegetable the vegetable to add as the initial element
+     */
     public VegetableList(Vegetable vegetable) {
         this();
         add(vegetable);
     }
 
-    // 3. Конструктор з колекцією
+    /**
+     * Constructs a VegetableList with the specified collection of Vegetables.
+     *
+     * @param vegetables the collection of vegetables to add
+     */
     public VegetableList(Collection<? extends Vegetable> vegetables) {
         this();
         addAll(vegetables);
     }
 
-    // Реалізація методів інтерфейсу List
     @Override
     public int size() {
         return size;
@@ -100,7 +122,6 @@ public class VegetableList implements List<Vegetable> {
         return a;
     }
 
-
     @Override
     public boolean add(Vegetable vegetable) {
         Node newNode = new Node(vegetable);
@@ -157,7 +178,7 @@ public class VegetableList implements List<Vegetable> {
 
     @Override
     public boolean addAll(int index, Collection<? extends Vegetable> c) {
-        return false;
+        return false; // Not implemented
     }
 
     @Override
@@ -328,12 +349,13 @@ public class VegetableList implements List<Vegetable> {
         return null;
     }
 
-    @Override
-    public List<Vegetable> subList(int fromIndex, int toIndex) {
-        return List.of();
-    }
 
-    // Допоміжні методи
+    /**
+     * Helper method to retrieve a node by index.
+     *
+     * @param index the index of the node to retrieve
+     * @return the node at the specified index
+     */
     private Node getNode(int index) {
         Node current = head;
         for (int i = 0; i < index; i++) {
@@ -342,11 +364,15 @@ public class VegetableList implements List<Vegetable> {
         return current;
     }
 
+    /**
+     * Helper method to validate the index for element access.
+     *
+     * @param index the index to check
+     * @throws IndexOutOfBoundsException if the index is out of range
+     */
     private void checkElementIndex(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
 }
-
-
