@@ -285,68 +285,114 @@ public class VegetableList implements List<Vegetable> {
 
     @Override
     public ListIterator<Vegetable> listIterator() {
-        return new ListIterator<>() {
-            private Node current = head;
-            private Node lastReturned = null;
-            private int index = 0;
-
-            @Override
-            public boolean hasNext() {
-                return current != null;
-            }
-
-            @Override
-            public Vegetable next() {
-                if (!hasNext()) throw new NoSuchElementException();
-                lastReturned = current;
-                Vegetable vegetable = current.vegetable;
-                current = current.next;
-                index++;
-                return vegetable;
-            }
-
-            @Override
-            public boolean hasPrevious() {
-                return index > 0;
-            }
-
-            @Override
-            public Vegetable previous() {
-                throw new UnsupportedOperationException("Previous operation is not supported.");
-            }
-
-            @Override
-            public int nextIndex() {
-                return index;
-            }
-
-            @Override
-            public int previousIndex() {
-                return index - 1;
-            }
-
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException("Remove operation is not supported.");
-            }
-
-            @Override
-            public void set(Vegetable vegetable) {
-                if (lastReturned == null) throw new IllegalStateException();
-                lastReturned.vegetable = vegetable;
-            }
-
-            @Override
-            public void add(Vegetable vegetable) {
-                throw new UnsupportedOperationException("Add operation is not supported.");
-            }
-        };
+        return new VegetableListIterator(0);
     }
-
 
     @Override
     public ListIterator<Vegetable> listIterator(int index) {
-        return null;
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        return new VegetableListIterator(index);
+    }
+
+    /**
+     * A custom ListIterator implementation for the VegetableList.
+     * Provides bidirectional traversal, along with methods to add, set, and remove elements
+     * in the list. This implementation supports standard operations, although
+     * traversing backward requires starting from the beginning, given the singly linked structure.
+     */
+    private class VegetableListIterator implements ListIterator<Vegetable> {
+        private Node current;
+        private Node lastReturned;
+        private int nextIndex;
+
+        /**
+         * Constructs a VegetableListIterator starting at the specified index.
+         *
+         * @param index the starting index for the iterator
+         */
+        VegetableListIterator(int index) {
+            current = (index == size) ? null : getNode(index);
+            nextIndex = index;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return nextIndex < size;
+        }
+
+        @Override
+        public Vegetable next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            lastReturned = current;
+            current = current.next;
+            nextIndex++;
+            return lastReturned.vegetable;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return nextIndex > 0;
+        }
+
+        @Override
+        public Vegetable previous() {
+            if (!hasPrevious()) {
+                throw new NoSuchElementException();
+            }
+            // Traversing from the beginning for a singly linked list
+            current = (nextIndex == size) ? getNode(nextIndex - 1) : getNode(nextIndex - 2);
+            lastReturned = current;
+            nextIndex--;
+            return lastReturned.vegetable;
+        }
+
+        @Override
+        public int nextIndex() {
+            return nextIndex;
+        }
+
+        @Override
+        public int previousIndex() {
+            return nextIndex - 1;
+        }
+
+        @Override
+        public void remove() {
+            if (lastReturned == null) {
+                throw new IllegalStateException();
+            }
+            VegetableList.this.remove(lastReturned.vegetable);
+            nextIndex--;
+            lastReturned = null;
+        }
+
+        @Override
+        public void set(Vegetable vegetable) {
+            if (lastReturned == null) {
+                throw new IllegalStateException();
+            }
+            lastReturned.vegetable = vegetable;
+        }
+
+        @Override
+        public void add(Vegetable vegetable) {
+            Node newNode = new Node(vegetable);
+            if (nextIndex == 0) {
+                newNode.next = head;
+                head = newNode;
+            } else {
+                Node prev = getNode(nextIndex - 1);
+                newNode.next = prev.next;
+                prev.next = newNode;
+            }
+            size++;
+            nextIndex++;
+            lastReturned = null;
+        }
     }
 
 
